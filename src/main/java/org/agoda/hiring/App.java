@@ -36,6 +36,7 @@ public class App {
 		// At least 18 alphanumeric characters and list of special chars !@#$&*
 		// At least 1 Upper case, 1 lower case ,least 1 numeric, 1 special character
 		if (newPassword.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$&*])(?=\\S+$).{18,}$")) {
+			//Used apache lib to get the number of steps required to match the string
 			int similarityIndex = LevenshteinDistance.getDefaultInstance().apply(oldPassword, newPassword);
 			Map<Character, Integer> charCountMap = new HashMap<Character, Integer>();
 			char[] ch = newPassword.toCharArray();
@@ -46,15 +47,18 @@ public class App {
 			int rpChar = 0;
 			int similarityPercent = 0;
 			for (int i = 0; i < newPassword.length(); i++) {
+				//Counting the number of digit
 				if (Character.isDigit(ch[i])) {
 					num++;
 				}
+				//Counting the number of special character
 				Matcher m = p.matcher(Character.toString(ch[i]));
 				if (m.find()) {
 					spChar++;
 					if (spChar == 5)
 						break;
 				}
+				//Counting the repetitive character
 				if (charCountMap.containsKey(ch[i])) {
 					charCountMap.put(ch[i], charCountMap.get(ch[i]) + 1);
 					if (charCountMap.get(ch[i]) > 4) {
@@ -65,6 +69,7 @@ public class App {
 					charCountMap.put(ch[i], 1);
 				}
 			}
+			//Calculating the % of similarity
 			similarityPercent = (similarityIndex * 100 / oldPassword.length());
 			// No duplicate repeat characters more than 4
 			// No more than 4 special characters
