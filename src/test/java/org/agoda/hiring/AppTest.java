@@ -30,7 +30,7 @@ public class AppTest extends TestCase {
 	 * Test having all the valid password requirement
 	 */
 	public void testValidPassword() {
-		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "@TqDB2q2#31!@QQ2Aa");
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "@TqDB2q2*31!@QQ2Aa");
 		assertTrue("Password is not a valid", flag);
 	}
 
@@ -198,4 +198,47 @@ public class AppTest extends TestCase {
 		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "  @TqDB2q2  #31!@QQ2Aa  ");
 		assertFalse("Password is not having blank space in between, end and in start", flag);
 	}
+	/**
+	 * Test having non listed special character
+	 */
+	public void testNonListedSplChar() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "^TqDB2q2#31!@QQ2Aa");
+		assertFalse("Password is having non listed spl chars", flag);
+	}
+	/**
+	 * Test having non listed special character at end
+	 */
+	public void testNonListedSplCharAtEnd() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "@wqqq2q2#31!@QQ2Q*");
+		assertFalse("Password is having non listed spl chars at end", flag);
+	}
+	/**
+	 * Test having only special char
+	 */
+	public void testHavingOnlySpclChar() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "!@#!@#!@#!@#!@#!@#!@#!@#");
+		assertFalse("Password is having all spcl char", flag);
+	}
+	/**
+	 * Test having only lower char
+	 */
+	public void testHavingOnlyLowerChar() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "qweqweqweqweqweqwe");
+		assertFalse("Password is having all lower char", flag);
+	}
+	/**
+	 * Test having only upper char
+	 */
+	public void testHavingOnlyUpperChar() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "QWEQWEQWEQWEQWEQWEQWE");
+		assertFalse("Password is having all upper char", flag);
+	}
+	/**
+	 * Test having only number 
+	 */
+	public void testHavingOnlyNumber() {
+		boolean flag = App.ChangePassword("@wqqq2q2#31!@QQ2QQ", "1231231231231231231");
+		assertFalse("Password is having all number", flag);
+	}
+	
 }

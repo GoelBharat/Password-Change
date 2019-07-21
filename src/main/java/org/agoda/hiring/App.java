@@ -16,7 +16,7 @@ public class App {
 	static String systemPassword = "@wqqq2q2#31!@QQ2QQ";
 
 	public static void main(String[] args) {
-		System.out.println(ChangePassword("@wqqq2q2#31!@QQ2QQ", "@wqqeab2#31!@QQ2QA"));
+		System.out.println(ChangePassword("@wqqq2q2#31!@QQ2QQ", "@werwe4e#b231QQ2qw"));
 	}
 
 	static boolean ChangePassword(String oldPassword, String newPassword) {
@@ -35,7 +35,7 @@ public class App {
 		// Password requirement for new password
 		// At least 18 alphanumeric characters and list of special chars !@#$&*
 		// At least 1 Upper case, 1 lower case ,least 1 numeric, 1 special character
-		if (newPassword.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$&*])(?=\\S+$).{18,}$")) {
+		if (newPassword.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$&*])(?=\\S+$).{18,}$") && newPassword.matches("^([a-zA-Z0-9!@#$&*]*)$")) {
 			//Used apache lib to get the number of steps required to match the string
 			int similarityIndex = LevenshteinDistance.getDefaultInstance().apply(oldPassword, newPassword);
 			Map<Character, Integer> charCountMap = new HashMap<Character, Integer>();
